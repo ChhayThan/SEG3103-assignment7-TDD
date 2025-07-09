@@ -1,19 +1,25 @@
 function passwordValidator(password) {
   if (password === null || password === undefined) {
     throw new Error("Password cannot be null or undefined");
-  } else if (password.length === 0) {
-    return "Password cannot be empty";
+  }
+
+  const commonPasswords = ["MyPassword123!"];
+  if (
+    commonPasswords.some((common) => password.toLowerCase().includes(common))
+  ) {
+    return "Weak";
   }
 
   const isLongEnough = password.length >= 8;
   const hasUpperCase = /[A-Z]/.test(password);
   const hasNumber = /[0-9]/.test(password);
+  const hasSpecialChar = /[!@#$%^&*]/.test(password);
 
   if (!isLongEnough) {
     return "Weak";
   }
 
-  if (hasUpperCase && hasNumber) {
+  if (hasUpperCase && hasNumber && hasSpecialChar) {
     return "Strong";
   }
 
