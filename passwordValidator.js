@@ -3,27 +3,21 @@ function passwordValidator(password) {
     throw new Error("Password cannot be null or undefined");
   }
 
-  const commonPasswords = ["mypassword123!"];
-  if (
-    commonPasswords.some((common) => password.toLowerCase().includes(common))
-  ) {
+  if (password.length <= 8) {
     return "Weak";
   }
 
-  const isLongEnough = password.length >= 8;
-  const hasUpperCase = /[A-Z]/.test(password);
-  const hasNumber = /[0-9]/.test(password);
-  const hasSpecialChar = /[!@#$%^&*]/.test(password);
+  const conditions = [
+    /[A-Z]/.test(password),
+    /[0-9]/.test(password),
+    /[!@#$%^&*]/.test(password),
+  ];
 
-  if (!isLongEnough | !hasUpperCase) {
-    return "Weak";
-  }
+  const score = conditions.filter(Boolean).length;
 
-  if (hasUpperCase && hasNumber && hasSpecialChar) {
-    return "Strong";
-  }
-
-  return "Medium";
+  if (score <= 1) return "Weak";
+  if (score === 2) return "Medium";
+  if (score === 3) return "Strong";
 }
 
 module.exports = passwordValidator;
