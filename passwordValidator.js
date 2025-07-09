@@ -3,7 +3,7 @@ function passwordValidator(password) {
     throw new Error("Password cannot be null or undefined");
   }
 
-  const commonPasswords = ["MyPassword123!"];
+  const commonPasswords = ["mypassword123!"];
   if (
     commonPasswords.some((common) => password.toLowerCase().includes(common))
   ) {
@@ -15,7 +15,7 @@ function passwordValidator(password) {
   const hasNumber = /[0-9]/.test(password);
   const hasSpecialChar = /[!@#$%^&*]/.test(password);
 
-  if (!isLongEnough) {
+  if (!isLongEnough | !hasUpperCase) {
     return "Weak";
   }
 

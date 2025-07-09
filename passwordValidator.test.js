@@ -7,7 +7,8 @@ test('should return "Weak" for passwords with less than 8 characters', () => {
 
 // Cycle 2: Test for an uppercase letter
 test('should return "Medium" for passwords with at least 8 characters but no uppercase letter', () => {
-  expect(passwordValidator("password")).toBe("Medium");
+  expect(passwordValidator("lowercase")).toBe("Weak");
+  expect(passwordValidator("Uppercase")).toBe("Medium");
 });
 
 // Cycle 3: Test for a number
